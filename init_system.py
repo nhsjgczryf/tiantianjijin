@@ -7,7 +7,7 @@ import sys
 import os
 
 # Add backend to path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'backend'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
 
 from models.database import init_db, get_session, Fund, FundValue, FundPerformance
 from scrapers.fund_scraper import FundScraper

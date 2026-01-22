@@ -8,7 +8,7 @@ import sys
 import os
 
 # Add parent directory to path
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from models.database import init_db, get_session, Fund, FundValue, FundPerformance
 from scrapers.fund_scraper import FundScraper

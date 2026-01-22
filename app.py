@@ -9,12 +9,16 @@ from datetime import datetime, timedelta
 import json
 
 # Add backend to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'backend'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
 
 from models.database import init_db, get_session, Fund, FundValue, FundPerformance
 from strategies.trading_strategies import analyze_fund, MovingAverageStrategy
 
-app = Flask(__name__)
+# Configure Flask app with custom template and static folders
+template_dir = os.path.join(os.path.dirname(__file__), 'frontend', 'templates')
+static_dir = os.path.join(os.path.dirname(__file__), 'frontend', 'static')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 CORS(app)
 
 # Initialize database
