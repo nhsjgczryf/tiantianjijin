@@ -195,4 +195,8 @@ def get_top_performers():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # For production, set debug=False and use a proper WSGI server
+    # Example: gunicorn -w 4 -b 0.0.0.0:5000 app:app
+    import os
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
