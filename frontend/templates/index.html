@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天天基金 - 基金分析系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏦 天天基金分析系统</h1>
+            <p class="subtitle">基金数据分析 · 量化策略 · 智能投资建议</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">概览</button>
+            <button class="tab-btn" onclick="showTab('search')">基金查询</button>
+            <button class="tab-btn" onclick="showTab('analysis')">量化分析</button>
+            <button class="tab-btn" onclick="showTab('performance')">业绩排行</button>
+        </nav>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="cards">
+                <div class="card">
+                    <h3>📊 数据库统计</h3>
+                    <div id="stats">
+                        <p>总基金数: <span id="total-funds">加载中...</span></p>
+                        <p>最后更新: <span id="last-update">-</span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🔥 热门基金</h3>
+                    <div id="hot-funds">加载中...</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>📈 市场趋势</h3>
+                <div id="market-trend-chart"></div>
+            </div>
+        </div>
+
+        <!-- Search Tab -->
+        <div id="search" class="tab-content">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="输入基金代码或名称搜索...">
+                <button onclick="searchFund()">搜索</button>
+            </div>
+
+            <div id="fund-list" class="fund-list"></div>
+
+            <div id="fund-detail" class="card" style="display: none;">
+                <h3 id="fund-detail-title">基金详情</h3>
+                <div id="fund-detail-info"></div>
+                <div id="fund-chart"></div>
+                <div id="fund-performance-data"></div>
+            </div>
+        </div>
+
+        <!-- Analysis Tab -->
+        <div id="analysis" class="tab-content">
+            <div class="card">
+                <h3>🤖 量化策略分析</h3>
+                <div class="search-box">
+                    <input type="text" id="analysis-fund-code" placeholder="输入基金代码">
+                    <button onclick="analyzeFund()">分析</button>
+                </div>
+
+                <div id="analysis-result"></div>
+            </div>
+
+            <div class="card">
+                <h3>📊 回测结果</h3>
+                <div id="backtest-result"></div>
+            </div>
+        </div>
+
+        <!-- Performance Tab -->
+        <div id="performance" class="tab-content">
+            <div class="card">
+                <h3>🏆 业绩排行榜</h3>
+                <div class="period-selector">
+                    <button onclick="loadTopPerformers('week')">近一周</button>
+                    <button onclick="loadTopPerformers('month')" class="active">近一月</button>
+                    <button onclick="loadTopPerformers('quarter')">近一季度</button>
+                    <button onclick="loadTopPerformers('year')">近一年</button>
+                </div>
+                <div id="top-performers"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 天天基金分析系统 | 数据仅供参考，投资需谨慎</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
