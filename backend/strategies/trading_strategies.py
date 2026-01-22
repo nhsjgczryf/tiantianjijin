@@ -250,7 +250,8 @@ def analyze_fund(fund_code):
     else:
         overall_signal = 'HOLD'
     
-    avg_confidence = np.mean([r['confidence'] for r in results.values() if 'error' not in r])
+    valid_confidences = [r['confidence'] for r in results.values() if 'error' not in r]
+    avg_confidence = np.mean(valid_confidences) if valid_confidences else 0.0
     
     return {
         'fund_code': fund_code,

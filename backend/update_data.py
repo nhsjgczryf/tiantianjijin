@@ -3,7 +3,7 @@ Data update scheduler - runs daily to update fund data
 """
 import schedule
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import sys
 import os
 
@@ -72,7 +72,11 @@ class DataUpdater:
                     fund_code=fund.fund_code
                 ).order_by(FundValue.date.desc()).first()
                 
-                start_date = latest.date if latest else datetime.now().date()
+                # If no previous data, fetch from 30 days ago
+                if latest:
+                    start_date = latest.date
+                else:
+                    start_date = (datetime.now() - timedelta(days=30)).date()
                 
                 # Get recent values
                 values = self.scraper.get_fund_values(

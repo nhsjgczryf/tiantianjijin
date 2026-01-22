@@ -199,6 +199,7 @@ header h1 {
     color: #333;
 }
 
+/* Performance colors - Chinese market convention: red=up, green=down */
 .positive {
     color: #d32f2f;
 }
